@@ -137,7 +137,7 @@ Here is the Event Policy configuration for `MQ Queue Not being Read`.
 
 Enter the parameters as highlighted.
 
-- Here the `event type` attribute value refers to the `threshold` we created in the previous step 3.2.
+- Here the `event type` attribute value refers to the `threshold`that  we created in the previous step 3.2.
 
 <img src="images/012-event-mq-1.png">
 <img src="images/012-event-mq-2.png">
@@ -155,7 +155,7 @@ Here is the Event Policy configuration for `Notification Saturation High`.
 
 Enter the parameters as highlighted.
 
-- Here the `summary` attribute value refers to the `threshold` we created in the previous step 3.3.
+- Here the `summary` attribute value refers to the `threshold` that we created in the previous step 3.3.
 
 <img src="images/013-event-saturation-1.png">
 <img src="images/013-event-saturation-2.png">
