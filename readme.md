@@ -1,4 +1,4 @@
-# MCM Monitoring Configuration - for use case : Notification messages are not received
+# MCM Monitoring Configuration : use case - Notification messages are not received
 
 MCM leverages the following objects for Application Monitoring and Incident management.
 - Thresholds
