@@ -1,4 +1,4 @@
-# MCM Monitoring Configuration for usecase - Notification Alerts are not sent
+# MCM Monitoring Configuration for use case - Notification messages are not received
 
 MCM leverages the following objects for Application Monitoring and Incident management.
 - Thresholds
@@ -6,9 +6,9 @@ MCM leverages the following objects for Application Monitoring and Incident mana
 - Event Policies
 - Incident Policies
 
-This document explains about how to create and configure those objects for an use case `Notification Alerts are not sent`.
+This document explains about how to create and configure those objects for an use case `Notification messages are not received`.
 
-Here is the usecase and incident handling flow.
+Here is the use case and incident handling flow.
 
 <img src="images/027-notification-flow.png">
 
@@ -26,19 +26,19 @@ We are going to create and configure the following.
 
 Here is the sample incident with events and runbook.
 
-#### Incident Summary
+### Incident Summary
 
 <img src="images/022-incident-notfication-inbox.png">
 
-#### Incident Details - Notification Saturation High
+### Incident Details - Notification Saturation High
 
 <img src="images/023-incident-notfication-event-saturation.png">
 
-#### Incident Details - MQ Queue Not being Read
+### Incident Details - MQ Queue Not being Read
 
 <img src="images/024-incident-notfication-event-mq.png">
 
-#### Incident Details - Runbook associated
+### Incident Details - Runbook associated
 <img src="images/025-incident-notfication-runbook.png">
 
 --------
@@ -53,15 +53,15 @@ Click on the `Infrastructure Monitoring`
 
 ## 3. Configuring Threshold
 
-#### Goto Threshold Page
+### 3.1 Goto Threshold Page
 
 Click on the `Threshold` card
 
 <img src="images/002-card-threshold.png">
 
-#### Create Threshold for `MQ Queue Not being Read`
+### 3.2 Create Threshold for `MQ Queue Not being Read`
 
-Here is the list of threshold created. You can click on `Create` button to create new.
+Here is the list of threshold created. You can click on `Create` button to create a new one.
 
 <img src="images/003-threshold-home.png">
 
@@ -69,20 +69,27 @@ Here is the threshold configuration for `MQ Queue Not being Read`.
 
 Enter the parameters as highlighted.
 
+```
+Current Depth > 0
+Input Opens < 1
+Output Opens > 0
+```
+
 <img src="images/004-threshold-mq-1.png">
 <img src="images/004-threshold-mq-2.png">
 <img src="images/004-threshold-mq-3.png">
 <img src="images/004-threshold-mq-4.png">
 
-#### Create Threshold for `Notification Saturation High`
-
-Here is the list of threshold created. You can click on `Create` button to create new.
-
-<img src="images/003-threshold-home.png">
+### 3.3 Create Threshold for `Notification Saturation High`
 
 Here is the threshold configuration for `Notification Saturation High`.
 
 Enter the parameters as highlighted.
+
+```
+- Saturation > 60 percent
+- Service Name contains wealthcare-web
+```
 
 <img src="images/005-threshold-saturation-1.png">
 <img src="images/005-threshold-saturation-2.png">
@@ -90,17 +97,17 @@ Enter the parameters as highlighted.
 
 --------
 
-## 5. Configuring Runbook
+## 4. Configuring Runbook
 
-#### Goto Runbook Page
+### 4.1 Goto Runbook Page
 
 Click on the `Runbook` card
 
 <img src="images/008-card-runbook.png">
 
-#### Create Runbook for `Notification Runbook`
+### 4.2 Create Runbook for `Notification Runbook`
 
-Here is the list of Runbook created. You can click on `Create` button to create new.
+Here is the list of Runbook created. You can click on `Create` button to create a new one.
 
 <img src="images/008-runbook-notification-1.png">
 
@@ -114,15 +121,15 @@ Enter the parameters as highlighted.
 
 ## 5. Configuring Event Policies
 
-#### Goto Event Policies Page
+### 5.1 Goto Event Policies Page
 
 Click on the `Policies` card
 
 <img src="images/030-card-policies.png">
 
-#### Create Event Policies for `MQ Queue Not being Read`
+### 5.2 Create Event Policies for `MQ Queue Not being Read`
 
-Here is the list of event policies created. You can click on `Create` button to create new.
+Here is the list of event policies created. You can click on `Create` button to create a new one.
 
 <img src="images/010-event-home.png">
 
@@ -130,37 +137,53 @@ Here is the Event Policy configuration for `MQ Queue Not being Read`.
 
 Enter the parameters as highlighted.
 
+- Here the `event type` attribute value refers to the `threshold` we created in the previous step 3.2.
+
 <img src="images/012-event-mq-1.png">
 <img src="images/012-event-mq-2.png">
 <img src="images/012-event-mq-3.png">
 
-#### Create Event Policies for `Notification Saturation High`
+#### Enrich
 
-Here is the list of event policies created. You can click on `Create` button to create new.
+Here we enrich the event with `Application = Wealthcare Notification Alert`.
 
-<img src="images/010-event-home.png">
+This event enrichment will ensure all the events with the `Application = Wealthcare Notification Alert` are correlated into one incident with the name `Wealthcare Notification Alert`
+
+### 5.3 Create Event Policies for `Notification Saturation High`
 
 Here is the Event Policy configuration for `Notification Saturation High`.
 
 Enter the parameters as highlighted.
 
+- Here the `summary` attribute value refers to the `threshold` we created in the previous step 3.3.
+
 <img src="images/013-event-saturation-1.png">
 <img src="images/013-event-saturation-2.png">
 <img src="images/013-event-saturation-3.png">
+
+#### Enrich
+
+Here we enrich the event with `Application = Wealthcare Notification Alert`.
+
+This event enrichment will ensure all the events with the `Application = Wealthcare Notification Alert` are correlated into one incident with the name `Wealthcare Notification Alert`
+
+#### Runbook
+
+Here assign the previously created runbook `Notification Runbook`
 
 --------
 
 ## 6. Configuring Incident Policies
 
-#### Goto Incident Policies Page
+### 6.1 Goto Incident Policies Page
 
 Click on the `Policies` card
 
 <img src="images/030-card-policies.png">
 
-#### Create Incident Policies for `Notification Alerts`
+### 6.2 Create Incident Policies for `Notification Alerts`
 
-Here is the list of Incident policies created. You can click on `Create` button to create new.
+Here is the list of Incident policies created. You can click on `Create` button to create a new one.
 
 <img src="images/014-incident-home.png">
 
@@ -168,6 +191,16 @@ Here is the Incident Policy configuration for `Notification Alerts`.
 
 Enter the parameters as highlighted.
 
+- Here the `Application` attribute value refers to the `Wealthcare Notification Alert` enrichment that was done in the previous step 5.3.
+
 <img src="images/015-incident-notification-1.png">
 <img src="images/015-incident-notification-2.png">
 <img src="images/015-incident-notification-3.png">
+
+#### Group
+
+We assinged the incident to `wealthcare group`.
+
+#### Priority
+
+We set the `priority 1` for this incident.
