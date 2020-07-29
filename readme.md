@@ -1,4 +1,4 @@
-# MCM Monitoring Configuration for use case - Notification messages are not received
+# MCM Monitoring Configuration - for use case : Notification messages are not received
 
 MCM leverages the following objects for Application Monitoring and Incident management.
 - Thresholds
@@ -199,8 +199,8 @@ Enter the parameters as highlighted.
 
 #### Group
 
-We assinged the incident to `wealthcare group`.
+Assinged the incident to `wealthcare group`.
 
 #### Priority
 
-We set the `priority 1` for this incident.
+Set the `priority 1` for this incident.
